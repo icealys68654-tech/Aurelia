@@ -1,10 +1,21 @@
-# Aurelia
+# AURELIA
 
-This repository contains the AURELIA website and **AURELIA Connect**, a separate static integrations portal for the existing [AURELIA app](https://aurelia-coding-assistant.lovable.app).
+AURELIA is a standalone static workspace prototype with an integrated local-preview interface for projects, an assistant demo, research notes, and settings.
 
-- The static homepage is [`index.html`](index.html).
-- The independently deployable integrations portal is in [`services/connect-portal/`](services/connect-portal/). It provides a copyable MCP client configuration, explains the OAuth connection flow, and links to the app's MCP and protected-resource metadata endpoints.
+## Run the website
 
-The `#FCapture.PNG` image in the repository is the supplied visual reference. The site uses a matching dark, green-accented visual language while keeping the screenshot asset unchanged.
+Open [`index.html`](index.html) directly in a modern browser or serve the repository root with any static web server. The site has no build step or external runtime dependencies.
 
-See the [service README](services/connect-portal/README.md) for run and deployment instructions for the integrations portal. The homepage is a dependency-free static page and can be opened directly or deployed to any static host.
+## Included experiences
+
+- **Overview:** workspace summary and recent projects.
+- **Projects:** create and remove projects stored in the current browser's local storage.
+- **AI assistant:** an explicitly local sample conversation; no AI service is called.
+- **Research:** save topic notes locally; no web search is performed.
+- **Integrations:** [`services/connect-portal/`](services/connect-portal/) prepares an MCP client configuration for an endpoint the user supplies. It does not host or connect to a server.
+
+This is a frontend digital-twin preview, not a production backend. Sign-in, remote data sync, live model generation, and web search are not configured. Local workspace data remains in the browser until cleared in Settings.
+
+## Visual reference
+
+The repository includes [`#FCapture.PNG`](%23FCapture.PNG), which is used as the available visual reference. There is no `#FCapture.md` file in the repository at this revision.
