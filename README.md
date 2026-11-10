@@ -1,6 +1,6 @@
 # AURELIA
 
-AURELIA is a CMS-backed workspace website with a responsive frontend and a Payload CMS backend powered by PostgreSQL.
+AURELIA is a CMS-backed workspace website with a responsive Next.js frontend and a Payload CMS backend powered by PostgreSQL.
 
 ## Run locally
 
@@ -11,26 +11,26 @@ Requirements: Node.js 20+, npm, and Docker Compose.
 3. Install dependencies: `npm install`.
 4. Start the website and CMS: `npm run dev`.
 5. Visit <http://localhost:3000> for the frontend and <http://localhost:3000/admin> to create the first CMS administrator.
+6. Run `npm run build` to compile the Next.js production website after configuring PostgreSQL and the environment variables.
 
-Payload creates its database schema on startup. Build for production with `npm run build`, then run `npm start`. The included Dockerfile builds the Next.js application; PostgreSQL should be deployed as a separate managed or containerized service. Set `DATABASE_URL`, `PAYLOAD_SECRET`, and `NEXT_PUBLIC_SERVER_URL` in the deployment environment. Never use the example secret or database password in production.
+## Website routes
 
-## Frontend
-
-- Responsive AURELIA visual language: graphite surfaces, subtle borders, and a lime accent based on the provided `#FCapture.PNG` visual reference.
-- Homepage, published-project listing and detail pages, and published research listing.
-- Content is read directly from Payload's server-side Local API; drafts are not shown to anonymous visitors.
+- `/` — CMS-configurable homepage with featured published projects.
+- `/projects` and `/projects/[slug]` — published project listing and detail pages.
+- `/research` — published research entries.
+- `/<page-slug>` — published editorial pages managed in the CMS.
+- `/admin` — Payload CMS dashboard for authenticated editors.
 
 ## CMS and backend
 
-- Payload CMS admin at `/admin`, with email/password authentication and first-user bootstrap.
-- PostgreSQL persistence using Payload's Postgres adapter.
-- CMS collections for Pages, Projects, Research, and Users, plus global Site settings.
-- Editors manage titles, slugs, summaries, rich content, status, categories, and source URLs in the CMS.
-- Public API reads are limited to published content; writes require an authenticated CMS user.
-- Payload REST API is mounted at `/api`.
+Payload CMS stores Pages, Projects, Research, Users, and global Site Settings in PostgreSQL. Editors manage content, drafts, publishing status, and site copy from the CMS dashboard. Public routes only query published documents; CMS write actions require an authenticated editor. The Payload REST API is mounted at `/api`.
 
-## Important limits
+## Visual reference
 
-This delivers a full-stack CMS website, not a reconstruction of private services or a production AI product. There is no model provider, external web search, or user-facing account/project workspace API configured. Admin accounts must be created and protected by the deployer. Configure HTTPS, backups, a strong secret, and database access controls before production deployment.
+[`#FCapture.PNG`](%23FCapture.PNG) is the supplied image reference. Its implementation notes and build checklist are recorded in [`#FCapture.MD`](%23FCapture.MD). The PNG is binary; the repository toolchain cannot extract image pixels, so the Markdown captures the design direction and should be refined against a direct visual review.
 
-The repository includes `#FCapture.PNG`; it does not contain a `#FCapture.md` script.
+## Production deployment
+
+Build with `npm run build` and serve with `npm start`, or use the included Dockerfile. PostgreSQL may be deployed separately. Set `DATABASE_URL`, `PAYLOAD_SECRET`, and `NEXT_PUBLIC_SERVER_URL` in the deployment environment. Never use example credentials or secrets in production. Configure HTTPS, database backups, and appropriate network access.
+
+This is a CMS-backed website, not a reconstruction of private services. AI generation, external web search, and user-facing account sync are not configured.

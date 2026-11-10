@@ -8,5 +8,16 @@ export const metadata: Metadata = {
 }
 
 export default function FrontendLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <><SiteHeader />{children}<footer className="site-footer wrap"><span>AURELIA · A SPACE FOR YOUR WORK</span><a href="/admin">Content management ↗</a></footer></>
+  return (
+    <html lang="en">
+      <body>
+        <SiteHeader />
+        {children}
+        <footer className="site-footer wrap">
+          <span>AURELIA · A SPACE FOR YOUR WORK</span>
+          <a href="/admin">Content management ↗</a>
+        </footer>
+      </body>
+    </html>
+  )
 }
