@@ -1,21 +1,36 @@
 # AURELIA
 
-AURELIA is a standalone static workspace prototype with an integrated local-preview interface for projects, an assistant demo, research notes, and settings.
+AURELIA is a CMS-backed workspace website with a responsive frontend and a Payload CMS backend powered by PostgreSQL.
 
-## Run the website
+## Run locally
 
-Open [`index.html`](index.html) directly in a modern browser or serve the repository root with any static web server. The site has no build step or external runtime dependencies.
+Requirements: Node.js 20+, npm, and Docker Compose.
 
-## Included experiences
+1. Copy `.env.example` to `.env` and set `PAYLOAD_SECRET` to a long random value.
+2. Start PostgreSQL: `docker compose up -d postgres`.
+3. Install dependencies: `npm install`.
+4. Start the website and CMS: `npm run dev`.
+5. Visit <http://localhost:3000> for the frontend and <http://localhost:3000/admin> to create the first CMS administrator.
 
-- **Overview:** workspace summary and recent projects.
-- **Projects:** create and remove projects stored in the current browser's local storage.
-- **AI assistant:** an explicitly local sample conversation; no AI service is called.
-- **Research:** save topic notes locally; no web search is performed.
-- **Integrations:** [`services/connect-portal/`](services/connect-portal/) prepares an MCP client configuration for an endpoint the user supplies. It does not host or connect to a server.
+Payload creates its database schema on startup. Build for production with `npm run build`, then run `npm start`. The included Dockerfile builds the Next.js application; PostgreSQL should be deployed as a separate managed or containerized service. Set `DATABASE_URL`, `PAYLOAD_SECRET`, and `NEXT_PUBLIC_SERVER_URL` in the deployment environment. Never use the example secret or database password in production.
 
-This is a frontend digital-twin preview, not a production backend. Sign-in, remote data sync, live model generation, and web search are not configured. Local workspace data remains in the browser until cleared in Settings.
+## Frontend
 
-## Visual reference
+- Responsive AURELIA visual language: graphite surfaces, subtle borders, and a lime accent based on the provided `#FCapture.PNG` visual reference.
+- Homepage, published-project listing and detail pages, and published research listing.
+- Content is read directly from Payload's server-side Local API; drafts are not shown to anonymous visitors.
 
-The repository includes [`#FCapture.PNG`](%23FCapture.PNG), which is used as the available visual reference. There is no `#FCapture.md` file in the repository at this revision.
+## CMS and backend
+
+- Payload CMS admin at `/admin`, with email/password authentication and first-user bootstrap.
+- PostgreSQL persistence using Payload's Postgres adapter.
+- CMS collections for Pages, Projects, Research, and Users, plus global Site settings.
+- Editors manage titles, slugs, summaries, rich content, status, categories, and source URLs in the CMS.
+- Public API reads are limited to published content; writes require an authenticated CMS user.
+- Payload REST API is mounted at `/api`.
+
+## Important limits
+
+This delivers a full-stack CMS website, not a reconstruction of private services or a production AI product. There is no model provider, external web search, or user-facing account/project workspace API configured. Admin accounts must be created and protected by the deployer. Configure HTTPS, backups, a strong secret, and database access controls before production deployment.
+
+The repository includes `#FCapture.PNG`; it does not contain a `#FCapture.md` script.

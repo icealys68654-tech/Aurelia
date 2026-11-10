@@ -1,13 +1,11 @@
 # AURELIA Connect
 
-A small, dependency-free static configuration helper for MCP clients. Enter the URL of an MCP endpoint you operate to preview and copy a client configuration snippet.
+A static helper for preparing an MCP client configuration for a service endpoint you operate.
 
-## Run locally
+## Run
 
-Open `index.html` in a browser or serve this directory with any static web server.
+Open `index.html` in a browser, or use the integration instructions in the repository root to run the full AURELIA site.
 
-## Scope and security
+## Boundaries
 
-- This page only formats a client configuration in the browser; it does not contact the endpoint.
-- No account credentials, tokens, or API keys are requested or stored.
-- It does not provide an MCP server, AI model, search service, or authorization provider. Deploy and secure those services independently.
+The helper formats a configuration in the browser. It does not host or connect to a server and does not request or store credentials.
